@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJAONET-BOT | Plateforme de Bots & VPS</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Variables CSS */
+        :root {
+            --primary: #00f2fe;
+            --secondary: #4facfe;
+            --bg-dark: #0f172a;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --text-light: #f8fafc;
+            --text-gray: #cbd5e1;
+        }
+
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* Animations clés */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 10px var(--primary); }
+            50% { box-shadow: 0 0 30px var(--primary), 0 0 50px var(--secondary); }
+            100% { box-shadow: 0 0 10px var(--primary); }
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10%;
+            background: radial-gradient(circle at center, #1e293b 0%, var(--bg-dark) 100%);
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: #000;
+            animation: glow 3s infinite;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+        }
+
+        .hero-image {
+            font-size: 15rem;
+            color: var(--primary);
+            animation: float 4s ease-in-out infinite;
+            text-shadow: 0 0 50px rgba(0, 242, 254, 0.5);
+        }
+
+        /* Sections (Features, Steps, etc.) */
+        section {
+            padding: 100px 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--primary);
+        }
+
+        /* Grid Layout pour les cartes */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.2);
+        }
+
+        .card i {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        /* Steps Section Spécial */
+        .step-card {
+            position: relative;
+        }
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: #000;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            box-shadow: 0 0 15px var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--text-gray);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Animations au scroll JS */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 120px;
+            }
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; /* Pour simplifier sur mobile */ }
+            .hero-image { font-size: 10rem; margin-top: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">DJAONET-BOT</div>
+        <div class="nav-links">
+            <a href="#accueil">Accueil</a>
+            <a href="#fonctionnalites">Fonctionnalités</a>
+            <a href="#etapes">Comment ça marche</a>
+            <a href="#avantages">Avantages</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="hero">
+        <div class="hero-content reveal active">
+            <h1>Automatisez votre monde avec <span>DJAONET-BOT</span></h1>
+            <p>La plateforme ultime pour générer des pairs WhatsApp & Telegram, déployer vos bots instantanément, et accéder à des serveurs VPS/RDP gratuits pour les administrateurs.</p>
+            <a href="#etapes" class="btn btn-primary"><i class="fas fa-rocket"></i> Commencer maintenant</a>
+        </div>
+        <div class="hero-image reveal active">
+            <i class="fas fa-robot"></i>
+        </div>
+    </section>
+
+    <!-- Section Fonctionnalités -->
+    <section id="fonctionnalites">
+        <h2 class="section-title reveal">Fonctionnalités Principales</h2>
+        <div class="grid">
+            <div class="card reveal">
+                <i class="fas fa-qrcode"></i>
+                <h3>Génération de Pairs</h3>
+                <p>Générez facilement des codes de jumelage (pairs) sécurisés pour connecter instantanément vos appareils WhatsApp et Telegram.</p>
+            </div>
+            <div class="card reveal">
+                <i class="fas fa-cogs"></i>
+                <h3>Déploiement de Bots</h3>
+                <p>Déployez vos bots WhatsApp et Telegram en quelques clics pour automatiser vos messages et réponses 24/7.</p>
+            </div>
+            <div class="card reveal">
+                <i class="fas fa-server"></i>
+                <h3>VPS & RDP Gratuits</h3>
+                <p>En tant qu'administrateur, bénéficiez d'un accès gratuit à des VPS et RDP performants pour héberger vos solutions.</p>
+            </div>
+            <div class="card reveal">
+                <i class="fas fa-users-cog"></i>
+                <h3>Gestion Multi-Comptes</h3>
+                <p>Gérez plusieurs comptes WhatsApp et Telegram depuis une seule interface utilisateur intuitive et conviviale.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Étapes -->
+    <section id="etapes" style="background: rgba(255,255,255,0.02);">
+        <h2 class="section-title reveal">Comment l'utiliser ?</h2>
+        <div class="grid">
+            <div class="card step-card reveal">
+                <div class="step-number">1</div>
+                <i class="fas fa-user-plus" style="margin-top: 20px;"></i>
+                <h3>Inscrivez-vous</h3>
+                <p>Créez votre compte gratuitement sur la plateforme DJAONET-BOT en quelques secondes.</p>
+            </div>
+            <div class="card step-card reveal">
+                <div class="step-number">2</div>
+                <i class="fas fa-link" style="margin-top: 20px;"></i>
+                <h3>Générez un Pair</h3>
+                <p>Obtenez votre code de connexion pour lier votre appareil WhatsApp ou Telegram au système.</p>
+            </div>
+            <div class="card step-card reveal">
+                <div class="step-number">3</div>
+                <i class="fas fa-paper-plane" style="margin-top: 20px;"></i>
+                <h3>Déployez le Bot</h3>
+                <p>Lancez l'automatisation de vos messages avec nos scripts de bots optimisés.</p>
+            </div>
+            <div class="card step-card reveal">
+                <div class="step-number">4</div>
+                <i class="fas fa-desktop" style="margin-top: 20px;"></i>
+                <h3>Accès Administrateur</h3>
+                <p>Réclamez et accédez à vos serveurs VPS et RDP gratuits pour une gestion avancée.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Avantages & Bots -->
+    <section id="avantages">
+        <h2 class="section-title reveal">Pourquoi nous choisir ?</h2>
+        <div class="grid">
+            <div class="card reveal" style="border-top: 4px solid var(--primary);">
+                <i class="fas fa-check-circle"></i>
+                <h3>100% Gratuit & Sans Engagement</h3>
+                <p>Profitez de nos services de base gratuitement, sans carte de crédit requise. Facile à utiliser, même pour les débutants.</p>
+            </div>
+            <div class="card reveal" style="border-top: 4px solid #25D366;">
+                <i class="fab fa-whatsapp"></i>
+                <h3>Bots WhatsApp</h3>
+                <p>Idéal pour le service client, l'envoi de notifications, et l'automatisation complète de vos conversations WhatsApp.</p>
+            </div>
+            <div class="card reveal" style="border-top: 4px solid #0088cc;">
+                <i class="fab fa-telegram-plane"></i>
+                <h3>Bots Telegram</h3>
+                <p>Gérez vos canaux, modérez vos groupes et répondez automatiquement à vos utilisateurs Telegram en temps réel.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 DJAONET-BOT. Tous droits réservés.</p>
+        <p style="font-size: 0.8rem; margin-top: 10px;">Plateforme de génération de pairs & Déploiement de Bots</p>
+    </footer>
+
+    <!-- Script pour les animations au défilement (Scroll Reveal) -->
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        // Déclencher une fois au chargement
+        reveal();
+    </script>
+</body>
+</html>
